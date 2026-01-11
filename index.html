@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AG | Eng.Abdelrahman Glall</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="bg-grid"></div>
+
+    <header>
+        <div class="logo-container">
+            <img src="assets/ag_logo.jpg" alt="AG Logo">
+            <div class="brand-name">AG.SYSTEM</div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#home" class="active">Home</a></li>
+                <li><a href="#courses">Courses</a></li>
+                <li><a href="#revisions">Revisions</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="home" class="hero">
+        <p class="typewriter">> Hello, World! I am</p>
+        <h1>Eng. Abdelrahman Glall</h1>
+        <p>Computer Science Student & Instructor</p>
+        <a href="#courses" class="cta-button">Initialize Learning</a>
+
+        <div class="scroll-indicator">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <section id="courses">
+        <h2 class="section-title"><span>01.</span> Courses</h2>
+        <div class="coming-soon-container">
+            <p class="coming-soon-text">&lt; The journey begins soon! /&gt;</p>
+        </div>
+    </section>
+
+    <section id="revisions">
+        <h2 class="section-title"><span>02.</span> Revisions</h2>
+        <div class="grid">
+            <!-- Revision Card 1 -->
+            <div class="card" onclick="location.href='database.html'">
+                <div class="card-icon"><i class="fas fa-database"></i></div>
+                <h3>Database Revision</h3>
+                <p>Complete course revision. ERD, Normalization, SQL, and Exam Prep.</p>
+                <a href="database.html" class="card-link">View Notes -></a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>Designed by <strong id="dynamic-year">AG</strong> &copy; 2026</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

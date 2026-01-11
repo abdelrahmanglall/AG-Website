@@ -1,0 +1,147 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" style="background-color: #0a192f; font-family: 'Fira Code', monospace;">
+    <!-- Definitions -->
+    <defs>
+        <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+            <path d="M0,0 L0,6 L9,3 z" fill="#00e5ff" />
+        </marker>
+        <filter id="glow">
+            <feGaussianBlur stdDeviation="2.5" result="coloredBlur"/>
+            <feMerge>
+                <feMergeNode in="coloredBlur"/>
+                <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+        </filter>
+    </defs>
+
+    <!-- Styles -->
+    <style>
+        .entity { fill: #050505; stroke: #00e5ff; stroke-width: 2; }
+        .weak-entity { fill: #050505; stroke: #00e5ff; stroke-width: 2; } /* Double border simulated by two rects */
+        .relationship { fill: #050505; stroke: #ff9f00; stroke-width: 2; transform-box: fill-box; transform-origin: center; }
+        .weak-relationship { fill: #050505; stroke: #00ff9d; stroke-width: 2; }
+        .attribute { fill: #050505; stroke: #8892b0; stroke-width: 1; }
+        .key-attribute { fill: #050505; stroke: #ff9f00; stroke-width: 1; stroke-dasharray: none;}
+        .multi-attribute { fill: #050505; stroke: #8892b0; stroke-width: 1; stroke-dasharray: 6 3; } /* Double ellipse usually, simplified here */
+        .text { fill: #e6f1ff; font-size: 12px; text-anchor: middle; dominant-baseline: middle; font-weight: bold; }
+        .line { stroke: #8892b0; stroke-width: 1.5; }
+        .line-total { stroke: #00e5ff; stroke-width: 3; } /* Double line representation roughly */
+        .line-relation { stroke: #ff9f00; stroke-width: 1.5; }
+    </style>
+
+    <!-- CONNECTIONS FIRST (Layering) -->
+    
+    <!-- Doctor Attributes -->
+    <line x1="150" y1="120" x2="100" y2="60" class="line" /> <!-- SSN -->
+    <line x1="150" y1="120" x2="150" y2="60" class="line" /> <!-- Name -->
+    <line x1="150" y1="120" x2="220" y2="60" class="line" /> <!-- Specialty -->
+
+    <!-- Spec/Gen Circle -->
+    <line x1="150" y1="170" x2="150" y2="220" class="line-total" /> <!-- Doctor to Circle -->
+    <line x1="150" y1="240" x2="100" y2="300" class="line" /> <!-- Circle to Surgeon -->
+    <line x1="150" y1="240" x2="200" y2="300" class="line" /> <!-- Circle to Consultant -->
+    
+    <!-- Treats Relation -->
+    <line x1="200" y1="145" x2="350" y2="145" class="line-relation" /> <!-- Doctor to Treats -->
+    <line x1="450" y1="145" x2="600" y2="145" class="line-relation" /> <!-- Treats to Patient -->
+    <line x1="400" y1="120" x2="400" y2="90" class="line" /> <!-- Date attr -->
+
+    <!-- Patient Attributes -->
+    <line x1="650" y1="120" x2="600" y2="60" class="line" /> <!-- ID -->
+    <line x1="650" y1="120" x2="700" y2="60" class="line" /> <!-- Name -->
+    <line x1="650" y1="120" x2="750" y2="100" class="line" /> <!-- Phone -->
+
+    <!-- Patient to Has -->
+    <line x1="650" y1="170" x2="650" y2="250" class="line-total" />
+
+    <!-- Has to Treatment -->
+    <line x1="650" y1="300" x2="650" y2="380" class="line-total" />
+
+    <!-- Treatment Attributes -->
+    <line x1="650" y1="430" x2="600" y2="480" class="line" /> <!-- Name -->
+    <line x1="650" y1="430" x2="700" y2="480" class="line" /> <!-- Cost -->
+
+
+    <!-- NODES -->
+
+    <!-- DOCTOR -->
+    <rect x="100" y="120" width="100" height="50" rx="5" class="entity" filter="url(#glow)" />
+    <text x="150" y="145" class="text" fill="#00e5ff">DOCTOR</text>
+    
+    <!-- Attributes -->
+    <ellipse cx="100" cy="60" rx="35" ry="20" class="key-attribute" />
+    <text x="100" y="60" class="text" fill="#ff9f00" style="text-decoration: underline;">SSN</text>
+
+    <ellipse cx="150" cy="60" rx="35" ry="20" class="attribute" />
+    <text x="150" y="60" class="text">Name</text>
+
+    <ellipse cx="220" cy="60" rx="40" ry="20" class="attribute" />
+    <text x="220" y="60" class="text">Specialty</text>
+
+    <!-- Disjoint Circle -->
+    <circle cx="150" cy="230" r="15" fill="#fff" stroke="#8892b0" />
+    <text x="150" y="230" class="text" style="fill:#000; font-size: 10px;">d</text>
+
+    <!-- SURGEON -->
+    <rect x="50" y="300" width="90" height="40" rx="5" class="entity" />
+    <text x="95" y="320" class="text">SURGEON</text>
+    <ellipse cx="95" cy="360" rx="40" ry="15" class="attribute" />
+    <text x="95" y="360" class="text" style="font-size: 9px;">Ops_Count</text>
+
+    <!-- CONSULTANT -->
+    <rect x="160" y="300" width="100" height="40" rx="5" class="entity" />
+    <text x="210" y="320" class="text">CONSULTANT</text>
+    <ellipse cx="210" cy="360" rx="40" ry="15" class="attribute" />
+    <text x="210" y="360" class="text" style="font-size: 9px;">Hourly_Rate</text>
+
+
+    <!-- TREATS Relation -->
+    <polygon points="400,120 450,145 400,170 350,145" class="relationship" />
+    <text x="400" y="145" class="text" fill="#ff9f00" style="font-size: 10px;">TREATS</text>
+    <ellipse cx="400" cy="90" rx="25" ry="15" class="attribute" />
+    <text x="400" y="90" class="text" style="font-size: 10px;">Date</text>
+    <!-- Cardinality -->
+    <text x="320" y="135" class="text" fill="#ff9f00">M</text>
+    <text x="480" y="135" class="text" fill="#ff9f00">N</text>
+
+
+    <!-- PATIENT -->
+    <rect x="600" y="120" width="100" height="50" rx="5" class="entity" style="stroke: #00ff9d;" filter="url(#glow)"/>
+    <text x="650" y="145" class="text" fill="#00ff9d">PATIENT</text>
+    
+    <!-- Attributes -->
+    <ellipse cx="600" cy="60" rx="25" ry="15" class="key-attribute" />
+    <text x="600" y="60" class="text" fill="#ff9f00" style="text-decoration: underline;">ID</text>
+
+    <ellipse cx="660" cy="60" rx="30" ry="15" class="attribute" />
+    <text x="660" y="60" class="text">Name</text>
+
+    <!-- Multivalued Phone (Double Ellipse) -->
+    <ellipse cx="750" cy="100" rx="35" ry="20" class="attribute" />
+    <ellipse cx="750" cy="100" rx="30" ry="15" class="attribute" />
+    <text x="750" y="100" class="text">Phone</text>
+
+
+    <!-- HAS Relation (Weak) -->
+    <!-- Double Diamond -->
+    <polygon points="650,250 690,275 650,300 610,275" class="weak-relationship" />
+    <polygon points="650,255 685,275 650,295 615,275" class="weak-relationship" fill="none" />
+    <text x="650" y="275" class="text" fill="#00ff9d">HAS</text>
+    <!-- Cardinality -->
+    <text x="660" y="235" class="text" fill="#00ff9d">1</text>
+    <text x="660" y="320" class="text" fill="#00ff9d">N</text>
+
+
+    <!-- TREATMENT (Weak Entity) -->
+    <!-- Double Rect -->
+    <rect x="600" y="380" width="100" height="50" class="weak-entity" style="stroke: #00ff9d;" />
+    <rect x="605" y="385" width="90" height="40" class="weak-entity" fill="none" style="stroke: #00ff9d;" />
+    <text x="650" y="405" class="text" fill="#e6f1ff">TREATMENT</text>
+
+    <!-- Attributes -->
+    <ellipse cx="600" cy="480" rx="40" ry="20" class="attribute" style="stroke-dasharray: 4 2; stroke: #ff9f00;" /> <!-- Partial Key -->
+    <text x="600" y="480" class="text" fill="#ff9f00">Name</text>
+
+    <ellipse cx="700" cy="480" rx="30" ry="15" class="attribute" />
+    <text x="700" y="480" class="text">Cost</text>
+
+</svg>

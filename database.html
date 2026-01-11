@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Database Revision | AG</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ startOnLoad: true, theme: 'dark' });
+    </script>
+</head>
+
+<body class="revision-page">
+    <div class="bg-grid"></div>
+
+    <header>
+        <div class="logo-container">
+            <img src="assets/ag_logo.jpg" alt="AG Logo">
+            <div class="brand-name">AG.SYSTEM</div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html#home">Home</a></li>
+                <li><a href="index.html#courses">Courses</a></li>
+                <li><a href="index.html#revisions" class="active">Revisions</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="revision-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <h3>Table of Contents</h3>
+            <ul id="toc-list">
+                <li><a href="#intro" class="active">01. Introduction</a></li>
+                <li><a href="#dbms">02. DB Environment & DBMS</a></li>
+                <li><a href="#analysis">03. Analysis Phase</a></li>
+                <li><a href="#erd">04. ERD - Entity Relationship</a></li>
+                <li><a href="#eerd">05. EERD - Enhanced ERD</a></li>
+                <li><a href="#constraints">06. Constraints & Generalization</a></li>
+                <li><a href="#mapping">07. Mapping to Relational</a></li>
+                <li><a href="#sql-basic">08. SQL Fundamentals</a></li>
+                <li><a href="#sql-adv">09. Advanced SQL Queries</a></li>
+                <li><a href="#nosql">10. NoSQL & MongoDB</a></li>
+                <li><a href="#exam-questions">11. Exam Questions Bank</a></li>
+                <li><a href="#practical">12. Practical Scenarios</a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content-area">
+            <div class="content-header">
+                <h1>Database Systems Revision</h1>
+                <p>Final Revision 2026 - By Abdelrahman Glall</p>
+            </div>
+
+            <!-- 1. Introduction -->
+            <section id="intro" class="topic-section">
+                <div class="topic-header">
+                    <h2>01. Introduction to Database Systems</h2>
+                    <button class="copy-link-btn" title="Copy Link"><i class="fas fa-link"></i></button>
+                </div>
+                <div class="topic-content">
+                    <h3>Definition</h3>
+                    <p>A database is a collection of related data that represents some aspect of the real world.</p>
+                    <p class="note-arabic">يعني بيانات ليها علاقة ببعض ومش متخزنة عشوائي، بتعبّر عن نظام حقيقي زي جامعة
+                        أو شركة.</p>
+
+                    <h3>File System vs. Database System</h3>
+                    <p>Compared to traditional file systems, database systems offer significant advantages. While file
+                        systems often suffer from data redundancy, difficulty in modification, and weak security,
+                        database systems support shared data usage, fine-grained access control, and minimize
+                        duplication, ensuring data integrity and security.</p>
+
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th>File System</th>
+                                <th>Database System</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Redundant data</td>
+                                <td>Shared data</td>
+                            </tr>
+                            <tr>
+                                <td>Modification difficulties</td>
+                                <td>Controlled access rights</td>
+                            </tr>
+                            <tr>
+                                <td>Weak security</td>
+                                <td>Reduced redundancy</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <p>Key database concepts include <strong>entities</strong> (real or logical objects such as Student,
+                        Course, or Employee), <strong>attributes</strong> (descriptions of entities such as Name, Age,
+                        Salary), <strong>records or tuples</strong> (complete data rows), <strong>fields</strong>
+                        (individual columns), and <strong>relationships</strong> (connections between two or more
+                        entities).</p>
+
+                    <h3>Database Development Stages</h3>
+                    <ol>
+                        <li><strong>Analysis:</strong> Understanding the problem and identifying the necessary data.
+                        </li>
+                        <li><strong>Design:</strong> Creating an Entity Relationship Diagram (ERD) that models the data
+                            and then converting it into tables.</li>
+                        <li><strong>Implementation:</strong> Executing the design using SQL commands.</li>
+                        <li><strong>GUI:</strong> Developing user interfaces that interact with the database.</li>
+                    </ol>
+                    <p>This structured approach ensures that databases are not only well-designed but also practical and
+                        user-friendly.</p>
+                </div>
+            </section>
+
+            <!-- 2. DBMS -->
+            <section id="dbms" class="topic-section">
+                <div class="topic-header">
+                    <h2>02. Database Environment & DBMS</h2>
+                    <button class="copy-link-btn" title="Copy Link"><i class="fas fa-link"></i></button>
+                </div>
+                <div class="topic-content">
+                    <h3>Definition</h3>
+                    <p>A DBMS is a collection of programs that enables users to create and maintain a database.</p>
+                    <p class="note-arabic">هو البرنامج اللي بنتعامل من خلاله مع الداتابيز: نضيف، نعدّل، نحذف، ونأمّن
+                        البيانات.</p>
+
+                    <h3>Common Examples</h3>
+                    <ul>
+                        <li>MySQL</li>
+                        <li>Oracle</li>
+                        <li>SQL Server</li>
+                        <li>MongoDB</li>
+                    </ul>
+
+                    <h3>Advantages</h3>
+                    <ul>
+                        <li><strong>Data Sharing:</strong> Multiple users can access data concurrently.</li>
+                        <li><strong>Data Security:</strong> Authorization and authentication mechanisms protect
+                            sensitive information.</li>
+                        <li><strong>Data Integrity:</strong> Ensures accuracy and consistency of data over its
+                            lifecycle.</li>
+                        <li><strong>Backup and Recovery:</strong> Protects against data loss through systematic backups.
+                        </li>
+                        <li><strong>Concurrency Control:</strong> Manages simultaneous data access without conflicts.
+                        </li>
+                    </ul>
+                    <p>These features make DBMS indispensable in maintaining robust, reliable, and secure data
+                        environments.</p>
+                </div>
+            </section>
+
+            <!-- 3. Analysis Phase -->
+            <section id="analysis" class="topic-section">
+                <div class="topic-header">
+                    <h2>03. Analysis Phase</h2>
+                    <button class="copy-link-btn" title="Copy Link"><i class="fas fa-link"></i></button>
+                </div>
+                <div class="topic-content">
+                    <h3>Definition</h3>
+                    <p>The analysis phase is the process of identifying the data requirements of the system.</p>
+                    <p class="note-arabic">يعني نفهم النظام محتاج بيانات إيه قبل أي تصميم.</p>
+
+                    <h3>Key Outputs</h3>
+                    <ul>
+                        <li>Identification of entities by name.</li>
+                        <li>Quantification of entities.</li>
+                        <li>Definition of attributes for each entity.</li>
+                        <li>Establishment of basic relationships among entities.</li>
+                    </ul>
+                    <p>By meticulously defining these elements, the analysis phase lays the groundwork for a coherent
+                        and efficient database design, preventing costly redesigns later.</p>
+                    <p class="note-arabic">المرحلة دي بتركّز على البيانات نفسها مش طريقة التخزين</p>
+                </div>
+            </section>
+
+            <!-- 4. ERD -->
+            <section id="erd" class="topic-section">
+                <div class="topic-header">
+                    <h2>04. ERD - Entity Relationship Diagram</h2>
+                    <button class="copy-link-btn" title="Copy Link"><i class="fas fa-link"></i></button>
+                </div>
+                <div class="topic-content">
+                    <p>The Entity Relationship Diagram (ERD) is a conceptual modeling tool that graphically represents
+                        the database structure. It provides a clear visualization of entities, their attributes, and the
+                        relationships between them.</p>
+
+                    <h3>Primary Components</h3>
+
+                    <div class="definition-box">
+                        <h4>Entity</h4>
+                        <p>An entity is a real-world object or concept that can be uniquely identified.</p>
+                        <p class="note-arabic">زي Student أو Employee.</p>
+                    </div>
+
+                    <div class="definition-box">
+                        <h4>Attribute</h4>
+                        <p>An attribute is a property that describes an entity.</p>
+                        <p class="note-arabic">زي الاسم أو السن.</p>
+                    </div>
+
+                    <div class="definition-box">
+                        <h4>Relationship</h4>
+                        <p>A relationship is an association among two or more entities.</p>
+                        <p class="note-arabic">يعني ارتباط بين كيانين.</p>
+                    </div>
+
+                    <h3>Classifications</h3>
+                    <div class="definition-box">
+                        <h4>Types of Relationships</h4>
+                        <ul>
+                            <li>One-to-One (1:1)</li>
+                            <li>One-to-Many (1:N)</li>
+                            <li>Many-to-Many (M:N)</li>
+                        </ul>
+                        <p class="note-arabic">دي أشكال الربط بين الكيانات.</p>
+                    </div>
+
+                    <ul>
+                        <li><strong>Entities:</strong> Strong Entity (Independent), Weak Entity (Dependant).</li>
+                        <li><strong>Attributes:</strong> Simple, Composite, Multivalued, Derived.</li>
+                        <li><strong>Relationship Degree:</strong> Unary, Binary, Ternary.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 5. EERD -->
+            <section id="eerd" class="topic-section">
+                <div class="topic-header">
+                    <h2>05. EERD - Enhanced ERD</h2>
+                    <button class="copy-link-btn" title="Copy Link"><i class="fas fa-link"></i></button>
+                </div>
+                <div class="topic-content">
+                    <p>The Enhanced Entity Relationship Diagram (EERD) extends the traditional ERD to handle more
+                        sophisticated and intricate database requirements. It introduces advanced concepts such as
+                        specialization, generalization, and inheritance.</p>
+
+                    <div class="definition-box">
+                        <h4>Specialization</h4>
+                        <p>Specialization is the process of defining a set of subclasses of an entity type.</p>
+                        <p class="note-arabic">تقسيم كيان كبير لكيانات أصغر.</p>
+                    </div>
+
+                    <div class="definition-box">
+                        <h4>Generalization</h4>
+                        <p>Generalization is the process of defining a generalized entity from several entity types.</p>
+                        <p class="note-arabic">تجميع كيانات شبه بعض في كيان واحد.</p>
+                    </div>
+
+                    <p>Inheritance allows subclasses to acquire attributes and relationships from their superclass,
+                        promoting reuse and consistency.</p>
+                </div>
+            </section>
+
+            <!-- 6. Constraints -->
+            <section id="constraints" class="topic-section">
+                <div class="topic-header">
+                    <h2>06. Constraints, Specialization & Generalization</h2>
+                    <button class="copy-link-btn" title="Copy Link"><i class="fas fa-link"></i></button>
+                </div>
+                <div class="topic-content">
+                    <h3>Disjointness Constraints</h3>
+                    <p>Specify whether an entity instance can simultaneously belong to multiple subclasses:</p>
+                    <ul>
+                        <li><strong>Disjoint:</strong> The entity belongs to only one subclass.</li>
+                        <li><strong>Overlapping:</strong> The entity may belong to multiple subclasses.</li>
+                    </ul>
+
+                    <h3>Completeness Constraints</h3>
+                    <p>Determine coverage of the superclass by subclasses:</p>
+                    <ul>
+                        <li><strong>Total Specialization:</strong> Every superclass entity must be a member of at least
+                            one subclass.</li>
+                        <li><strong>Partial Specialization:</strong> Some superclass entities might not belong to any
+                            subclass.</li>
+                    </ul>
+
+                    <h3>Hierarchies & Lattices</h3>
+                    <ul>
+                        <li><strong>Hierarchy:</strong> Single inheritance tree.</li>
+                        <li><strong>Lattice:</strong> Multiple inheritance structure.</li>
+                        <li><strong>Category (Union Type):</strong> Subclasses formed by the union of multiple
+                            superclasses.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 7. Mapping -->
+            <section id="mapping" class="topic-section">
+                <div class="topic-header">
+                    <h2>07. Mapping ERD to Relational Model</h2>
+                    <button class="copy-link-btn" title="Copy Link"><i class="fas fa-link"></i></button>
+                </div>
+                <div class="topic-content">
+                    <h3>Relational Model</h3>
+                    <p>The relational model represents the database as a collection of relations (tables).</p>
+                    <p class="note-arabic">يعني نحول الرسمة لجداول</p>
+
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th>ERD Concept</th>
+                                <th>Relational Model</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Entity</td>
+                                <td>Table</td>
+                            </tr>
+                            <tr>
+                                <td>Attribute</td>
+                                <td>Column</td>
+                            </tr>
+                            <tr>
+                                <td>Primary Key</td>
+                                <td>Primary Key (PK)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3>Relationship Mapping</h3>
+                    <ul>
+                        <li><strong>One-to-One (1:1):</strong> Foreign key (FK) in one of the tables.</li>
+                        <li><strong>One-to-Many (1:N):</strong> FK in N-side table.</li>
+                        <li><strong>Many-to-Many (M:N):</strong> Separate joining table.</li>
+                    </ul>
+
+                    <h3>Special Considerations</h3>
+                    <ul>
+                        <li><strong>Weak Entity:</strong> Mapped to a table with FK referencing owner entity plus
+                            partial key.</li>
+                        <li><strong>Multivalued Attribute:</strong> Requires a separate table.</li>
+                        <li><strong>Composite Attribute:</strong> Decomposed into simple attributes.</li>
+                        <li><strong>Derived Attribute:</strong> Not stored physically.</li>
+                        <li><strong>Recursive Relationship:</strong> Implemented via self-referencing FK.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 8. SQL Basic -->
+            <section id="sql-basic" class="topic-section">
+                <div class="topic-header">
+                    <h2>08. SQL Fundamentals</h2>
+                    <button class="copy-link-btn" title="Copy Link"><i class="fas fa-link"></i></button>
+                </div>
+                <div class="topic-content">
+                    <h3>Definition</h3>
+                    <p>SQL is a standard language for defining and manipulating relational databases.</p>
+                    <p class="note-arabic">هي اللغة اللي بنتعامل بيها مع الجداول.</p>
+
+                    <ul>
+                        <li><strong>DDL (Data Definition Language):</strong> CREATE, ALTER, DROP.</li>
+                        <li><strong>DML (Data Manipulation Language):</strong> INSERT, UPDATE, DELETE.</li>
+                        <li><strong>DQL (Data Query Language):</strong> SELECT.</li>
+                    </ul>
+
+                    <h3>Example: Create Table</h3>
+                    <pre><code class="language-sql">CREATE TABLE Student (
+    StudentID INT PRIMARY KEY,
+    Name VARCHAR(100),
+    Age INT
+);</code></pre>
+                </div>
+            </section>
+
+            <!-- 9. SQL Advanced -->
+            <section id="sql-adv" class="topic-section">
+                <div class="topic-header">
+                    <h2>09. Advanced SQL Queries</h2>
+                    <button class="copy-link-btn" title="Copy Link"><i class="fas fa-link"></i></button>
+                </div>
+                <div class="topic-content">
+                    <h3>Data Retrieval</h3>
+                    <p>Uses <code>SELECT</code> with clauses such as <code>WHERE</code> (conditions) and
+                        <code>ORDER BY</code> (sorting).
+                    </p>
+
+                    <h3>Aggregate Functions</h3>
+                    <p>COUNT, SUM, AVG, MIN, MAX.</p>
+
+                    <h3>Grouping</h3>
+                    <p><code>GROUP BY</code> clusters rows sharing attribute values, often combined with
+                        <code>HAVING</code> to filter groups.
+                    </p>
+
+                    <h3>JOIN Operations</h3>
+                    <ul>
+                        <li><strong>INNER JOIN:</strong> Returns matching rows.</li>
+                        <li><strong>LEFT JOIN:</strong> Returns all rows from the left table, matched or not.</li>
+                        <li><strong>RIGHT JOIN:</strong> Returns all rows from the right table.</li>
+                        <li><strong>FULL JOIN:</strong> Returns all rows from both tables.</li>
+                    </ul>
+
+                    <h3>Subqueries</h3>
+                    <p>Queries nested inside another query, allowing for complex, multi-step data retrieval logic.</p>
+                </div>
+            </section>
+
+            <!-- 10. NoSQL -->
+            <section id="nosql" class="topic-section">
+                <div class="topic-header">
+                    <h2>10. NoSQL & MongoDB</h2>
+                    <button class="copy-link-btn" title="Copy Link"><i class="fas fa-link"></i></button>
+                </div>
+                <div class="topic-content">
+                    <h3>Definition</h3>
+                    <p>NoSQL databases are databases that do not use the relational model.</p>
+                    <p class="note-arabic">بتستخدم مع البيانات الكبيرة وغير المنظمة.</p>
+
+                    <h3>Key Characteristics</h3>
+                    <ul>
+                        <li><strong>Schema-less:</strong> Data can be stored without predefined schemas.</li>
+                        <li><strong>Scalable:</strong> Easily handles large volumes of data.</li>
+                        <li><strong>Distributed:</strong> Supports data distribution across multiple servers.</li>
+                    </ul>
+
+                    <h3>Common NoSQL Types</h3>
+                    <ul>
+                        <li>Key-Value Stores</li>
+                        <li>Document Stores (e.g., MongoDB)</li>
+                        <li>Column-Family Stores</li>
+                        <li>Graph Databases</li>
+                    </ul>
+
+                    <h3>MongoDB</h3>
+                    <p>A prominent document-based NoSQL database that stores data in JSON-like BSON documents.</p>
+                </div>
+            </section>
+
+            <!-- 11. Exam Questions -->
+            <section id="exam-questions" class="topic-section">
+                <div class="topic-header">
+                    <h2>11. Exam Preparation Questions</h2>
+                    <button class="copy-link-btn" title="Copy Link"><i class="fas fa-link"></i></button>
+                </div>
+                <div class="topic-content">
+                    <p class="note-arabic">لو فاهم التعريفات ومطبّق عليهم، الامتحان هيبقى سهل.</p>
+
+                    <div class="definition-box">
+                        <h4>Conceptual Questions</h4>
+                        <ol>
+                            <li>Define database system.</li>
+                            <li>What is the difference between database and DBMS?</li>
+                            <li>List the main advantages of using DBMS.</li>
+                            <li>Explain data redundancy and data inconsistency.</li>
+                            <li>What is data independence?</li>
+                            <li>What are the main stages of database design?</li>
+                            <li>What is the output of the analysis phase?</li>
+                            <li>Differentiate between analysis phase and design phase.</li>
+                        </ol>
+
+                        <h4>ERD & Modeling Questions</h4>
+                        <ol start="9">
+                            <li>Define entity and attribute.</li>
+                            <li>What is the difference between strong entity and weak entity?</li>
+                            <li>Define primary key and partial key.</li>
+                            <li>Explain different types of attributes with examples.</li>
+                            <li>What is a derived attribute?</li>
+                            <li>Define relationship and relationship degree.</li>
+                            <li>Explain unary, binary, and ternary relationships.</li>
+                            <li>What is a recursive relationship?</li>
+                            <li>Explain the difference between 1:1, 1:N, and M:N relationships.</li>
+                            <li>Draw ERD for a simple system (student–course–instructor).</li>
+                        </ol>
+
+                        <h4>EERD Questions</h4>
+                        <ol start="19">
+                            <li>What is Enhanced ERD (EERD)?</li>
+                            <li>Why do we use EERD instead of ERD?</li>
+                            <li>Define specialization.</li>
+                            <li>Define generalization.</li>
+                            <li>What is the difference between specialization and generalization?</li>
+                            <li>Explain disjointness constraint.</li>
+                            <li>Explain completeness constraint.</li>
+                            <li>Differentiate between total and partial specialization.</li>
+                            <li>What is overlapping specialization?</li>
+                            <li>What is a category (union type)?</li>
+                            <li>Differentiate between shared subclass and category.</li>
+                        </ol>
+
+                        <h4>Mapping ERD to Relational Model</h4>
+                        <ol start="30">
+                            <li>Explain mapping of strong entity to relational schema.</li>
+                            <li>Explain mapping of weak entity.</li>
+                            <li>How is a multivalued attribute mapped?</li>
+                            <li>How is a composite attribute mapped?</li>
+                            <li>How is a derived attribute handled in mapping?</li>
+                            <li>Explain mapping of 1:1 relationship.</li>
+                            <li>Explain mapping of 1:N relationship.</li>
+                            <li>Explain mapping of M:N relationship.</li>
+                            <li>How is a recursive relationship mapped?</li>
+                            <li>Write relational schema from a given ERD.</li>
+                        </ol>
+
+                        <h4>SQL Questions</h4>
+                        <ol start="40">
+                            <li>Define SQL.</li>
+                            <li>What are the main SQL commands?</li>
+                            <li>Write syntax of CREATE TABLE.</li>
+                            <li>Explain PRIMARY KEY and FOREIGN KEY.</li>
+                            <li>What is the use of ALTER TABLE?</li>
+                            <li>Differentiate between DELETE and DROP.</li>
+                            <li>Write SQL query to insert data into a table.</li>
+                            <li>Write SQL query to update records.</li>
+                            <li>Explain SELECT statement.</li>
+                            <li>What is the difference between WHERE and HAVING?</li>
+                            <li>Explain ORDER BY clause.</li>
+                            <li>What are aggregate functions? Give examples.</li>
+                            <li>Explain GROUP BY with example.</li>
+                            <li>What is JOIN? Mention its types.</li>
+                            <li>Differentiate between INNER JOIN and LEFT JOIN.</li>
+                            <li>Write SQL query using JOIN and GROUP BY together.</li>
+                        </ol>
+
+                        <h4>NoSQL & MongoDB Questions</h4>
+                        <ol start="56">
+                            <li>What is NoSQL?</li>
+                            <li>Why NoSQL databases became important?</li>
+                            <li>Compare SQL and NoSQL databases.</li>
+                            <li>List types of NoSQL databases.</li>
+                            <li>What is MongoDB?</li>
+                            <li>How does MongoDB store data?</li>
+                            <li>Write MongoDB command to insert a document.</li>
+                            <li>Write MongoDB command to retrieve documents.</li>
+                            <li>Write MongoDB command to update a document.</li>
+                            <li>Write MongoDB command to delete a document.</li>
+                            <li>Explain aggregation in MongoDB.</li>
+                        </ol>
+
+                        <h4>General & Comparison Questions</h4>
+                        <ol start="67">
+                            <li>Compare file-based system and database system.</li>
+                            <li>Compare ERD and EERD.</li>
+                            <li>Compare SQL and NoSQL.</li>
+                            <li>Explain full database design lifecycle from analysis to implementation.</li>
+                        </ol>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 12. Practical Scenarios -->
+            <section id="practical" class="topic-section">
+                <div class="topic-header">
+                    <h2>12. Practical Scenarios & Solutions</h2>
+                    <button class="copy-link-btn" title="Copy Link"><i class="fas fa-link"></i></button>
+                </div>
+                <div class="topic-content">
+                    <h3>Q1: The Mapping Beast</h3>
+                    <p><strong>Scenario: University Hospital</strong></p>
+                    <ol>
+                        <li>Doctor (Superclass): Has SSN, Name, Specialty.</li>
+                        <li>Subclasses: 'Surgeon' (has operations_count) and 'Consultant' (has hourly_rate). Constraint:
+                            Disjoint, Total.</li>
+                        <li>Patient: Has ID, Name, Phone(Multi-valued).</li>
+                        <li>Treatment (Weak): Dependent on Patient. Has Name and Cost. (Partial Key: Name).</li>
+                        <li>Treats (Relation): M:N relationship between Doctor and Patient with attribute 'Date'.</li>
+                    </ol>
+
+                    <h4>ER Diagram</h4>
+                    <div class="erd-container">
+                        <img src="assets/q1_diagram.svg" alt="University Hospital ER Diagram - The Mapping Beast"
+                            class="erd-image">
+                    </div>
+
+                    <h4>Step-by-Step Solution:</h4>
+                    <pre><code class="language-sql">-- 1. Superclass (Doctor)
+DOCTOR (SSN, Name, Specialty)
+
+-- 2. Subclasses (Disjoint/Total -> Separate Tables with PK of Super)
+SURGEON (Doc_SSN, Operations_Count)
+CONSULTANT (Doc_SSN, Hourly_Rate)
+
+-- 3. Strong Entity (Patient)
+PATIENT (ID, Name)
+
+-- 4. Multivalued Attribute (Phone) -> New Table
+PATIENT_PHONES (Patient_ID, Phone_No)
+
+-- 5. Weak Entity (Treatment) -> Owner PK + Partial Key
+TREATMENT (Patient_ID, Treatment_Name, Cost)
+
+-- 6. M:N Relation (Treats) -> Associative Table
+TREATS (Doc_SSN, Patient_ID, Date)</code></pre>
+
+                    <hr style="border-color: rgba(0,229,255,0.1); margin: 30px 0;">
+
+                    <h3>Given Tables for SQL Challenges</h3>
+                    <div class="definition-box">
+                        <p><strong>Department:</strong> Dept_ID, Dept_Name (e.g., 1, CS)</p>
+                        <p><strong>Student:</strong> ID, Name, GPA, Dept_ID (e.g., 101, Ali, 3.5, 1)</p>
+                        <p><strong>Course:</strong> C_Code, Title, Credits (e.g., CS101, Java, 3)</p>
+                    </div>
+
+                    <h4>1. Insert a new Student (Complex)</h4>
+                    <p>Insert a student named 'Mona', GPA 3.8, into the 'CS' Department (Warning: You only know the
+                        Department Name 'CS', not its ID!).</p>
+                    <pre><code class="language-sql">INSERT INTO Student (Name, GPA, Dept_ID)
+VALUES ('Mona', 3.8, (
+  SELECT Dept_ID FROM Department
+  WHERE Dept_Name = 'CS'
+));</code></pre>
+
+                    <h4>2. Complex Select (Join + Condition)</h4>
+                    <p>Retrieve Names and GPA of students in 'CS' department who have a GPA higher than 3.0, ordered by
+                        GPA descending.</p>
+                    <pre><code class="language-sql">SELECT S.Name, S.GPA
+FROM Student S
+INNER JOIN Department D ON S.Dept_ID = D.Dept_ID
+WHERE D.Dept_Name = 'CS'
+AND S.GPA > 3.0
+ORDER BY S.GPA DESC;</code></pre>
+
+                    <h4>3. Aggregation (Grouping)</h4>
+                    <p>Find the Average GPA for each Department, but only show departments with more than 50 students.
+                    </p>
+                    <pre><code class="language-sql">SELECT Dept_ID, AVG(GPA)
+FROM Student
+GROUP BY Dept_ID
+HAVING COUNT(ID) > 50;</code></pre>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <footer>
+        <p>Designed by <strong>AG</strong> &copy; 2026</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
